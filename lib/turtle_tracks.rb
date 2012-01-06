@@ -5,14 +5,14 @@ class TurtleTracks
   attr_accessor :canvas, :size, :dir
 
   COMPASS = {
-    0 => Proc.new { @cursor[:y] -= 1 },
-    1 => Proc.new { @cursor[:y] -= 1; @cursor[:x] =+ 1 },
-    2 => Proc.new { @cursor[:x] += 1 },
-    3 => Proc.new { @cursor[:y] += 1; @cursor[:x] += 1 },
-    4 => Proc.new { @cursor[:y] += 1 },
-    5 => Proc.new { @cursor[:y] += 1; @cursor[:x] -= 1 },
-    6 => Proc.new { @cursor[:x] -= 1 },
-    7 => Proc.new { @cursor[:y] -= 1; @cursor[:x] -= 1 }
+    0 => Proc.new { |cur| { :x => cur[:x], :y => cur[:y]-1 } },
+    1 => Proc.new { |cur| { :x => cur[:x]+2, :y => cur[:y]-1 } },
+    2 => Proc.new { |cur| { :x => cur[:x]+2, :y => cur[:y] } },
+    3 => Proc.new { |cur| { :x => cur[:x]+2, :y => cur[:y]+1 } },
+    4 => Proc.new { |cur| { :x => cur[:x], :y => cur[:y]+1 } },
+    5 => Proc.new { |cur| { :x => cur[:x]-2, :y => cur[:y]+1 } },
+    6 => Proc.new { |cur| { :x => cur[:x]-2, :y => cur[:y] } },
+    7 => Proc.new { |cur| { :x => cur[:x]-2, :y => cur[:y]-1 } }
   }
 
   def initialize path_to_logo_file
@@ -44,7 +44,7 @@ class TurtleTracks
       change_direction(cmd[0],cmd[1].to_i)
     when "FD"
       cmd[1].to_i.times do
-        COMPASS[cmd.last.to_i].call
+        @cursor = COMPASS[@dir].call @cursor
         @canvas[@cursor[:y]][@cursor[:x]] = "X"
       end
     end
