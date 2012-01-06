@@ -24,6 +24,41 @@ describe TurtleTracks do
     ]
   end
 
+  it "should be able to change direction" do
+    @o.change_direction("R",45).should == 1
+    @o.change_direction("R",90).should == 3
+    @o.change_direction("R",360).should == 3
+    @o.change_direction("L",360).should == 3
+    @o.change_direction("L",180).should == 7
+    @o.change_direction("R",720).should == 7
+  end
+
+  it "should move according to command" do
+
+    @o.dir = 0
+
+    @o.command("RT 90")
+    @o.dir.should == 2
+
+    # @o.command("FD 5")
+    # @o.canvas.should == [
+    #   ". . . . . . . . . . .",
+    #   ". . . . . . . . . . .",
+    #   ". . . . . . . . . . .",
+    #   ". . . . . . . . . . .",
+    #   ". . . . . . . . . . .",
+    #   ". . . . . X X X X X X",
+    #   ". . . . . . . . . . .",
+    #   ". . . . . . . . . . .",
+    #   ". . . . . . . . . . .",
+    #   ". . . . . . . . . . .",
+    #   ". . . . . . . . . . ."
+    # ]
+  end
+
+
 end
+
+
 
 
