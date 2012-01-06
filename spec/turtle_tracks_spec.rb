@@ -54,6 +54,45 @@ describe TurtleTracks do
       ". . . . . . . . . . .",
       ". . . . . . . . . . ."
     ]
+
+    @o.command("RT 135")
+    @o.dir.should == 5
+
+    @o.command("FD 5")
+    @o.canvas.should == [
+      ". . . . . . . . . . .",
+      ". . . . . . . . . . .",
+      ". . . . . . . . . . .",
+      ". . . . . . . . . . .",
+      ". . . . . . . . . . .",
+      ". . . . . X X X X X X",
+      ". . . . . . . . . X .",
+      ". . . . . . . . X . .",
+      ". . . . . . . X . . .",
+      ". . . . . . X . . . .",
+      ". . . . . X . . . . ."
+    ]
+  end
+
+  it "should process simple logo file" do
+    @o.run
+    @o.canvas.should == [
+      ". . . . . . . . . . .",
+      ". . . . . . . . . . .",
+      ". . . . . . . . . . .",
+      ". . . . . . . . . . .",
+      ". . . . . . . . . . .",
+      ". . . . . X X X X X X",
+      ". . . . . . . . . X .",
+      ". . . . . . . . X . .",
+      ". . . . . . . X . . .",
+      ". . . . . . X . . . .",
+      ". . . . . X . . . . ."
+    ]
+
+    @o1 = TurtleTracks.new(File.expand_path(File.dirname(__FILE__)) + '/fixtures/simple.logo')
+    @o1.run
+    pp @o1.canvas
   end
 
 

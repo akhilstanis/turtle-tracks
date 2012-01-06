@@ -48,7 +48,12 @@ class TurtleTracks
         @canvas[@cursor[:y]][@cursor[:x]] = "X"
       end
     end
+  end
 
+  def run
+    @logo.each do |cmd|
+      command cmd
+    end
   end
 
 end
