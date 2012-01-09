@@ -90,9 +90,10 @@ describe TurtleTracks do
       ". . . . . X . . . . ."
     ]
 
-    @o1 = TurtleTracks.new(File.expand_path(File.dirname(__FILE__)) + '/fixtures/simple.logo')
-    @o1.run
-    pp @o1.canvas
+    # @o1 = TurtleTracks.new(File.expand_path(File.dirname(__FILE__)) + '/fixtures/simple.logo')
+    # @o1.run
+    # expected = File.open(File.expand_path(File.dirname(__FILE__)) + '/fixtures/simple_out.txt').readlines.collect { |line| line.chomp }
+    # @o1.canvas.should == expected
   end
 
 

@@ -4,17 +4,6 @@ class TurtleTracks
 
   attr_accessor :canvas, :size, :dir
 
-  COMPASS = {
-    0 => Proc.new { |cur| { :x => cur[:x], :y => cur[:y]-1 } },
-    1 => Proc.new { |cur| { :x => cur[:x]+2, :y => cur[:y]-1 } },
-    2 => Proc.new { |cur| { :x => cur[:x]+2, :y => cur[:y] } },
-    3 => Proc.new { |cur| { :x => cur[:x]+2, :y => cur[:y]+1 } },
-    4 => Proc.new { |cur| { :x => cur[:x], :y => cur[:y]+1 } },
-    5 => Proc.new { |cur| { :x => cur[:x]-2, :y => cur[:y]+1 } },
-    6 => Proc.new { |cur| { :x => cur[:x]-2, :y => cur[:y] } },
-    7 => Proc.new { |cur| { :x => cur[:x]-2, :y => cur[:y]-1 } }
-  }
-
   def initialize path_to_logo_file
     File.open path_to_logo_file, "r" do |file|
       @logo = file.readlines
@@ -44,7 +33,28 @@ class TurtleTracks
       change_direction(cmd[0],cmd[1].to_i)
     when "FD"
       cmd[1].to_i.times do
-        @cursor = COMPASS[@dir].call @cursor
+        case @dir
+        when 0
+          @cursor[:y] -=1
+        when 1
+          @cursor[:x] +=2
+          @cursor[:y] -=1
+        when 2
+          @cursor[:x] +=2
+        when 3
+          @cursor[:x] +=2
+          @cursor[:y] +=1
+        when 4
+          @cursor[:y] +=1
+        when 5
+          @cursor[:x] -=2
+          @cursor[:y] +=1
+        when 6
+          @cursor[:x] -=2
+        when 7
+          @cursor[:x] -=2
+          @cursor[:y] -=1
+        end
         @canvas[@cursor[:y]][@cursor[:x]] = "X"
       end
     end
